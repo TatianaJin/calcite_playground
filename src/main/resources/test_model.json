@@ -1,0 +1,16 @@
+{
+  "version": "1.0",
+  "defaultSchema": "SALES",
+  "schemas": [
+    {
+      "name": "SALES",
+      "tables": [
+        {
+          "type": "custom",
+          "name": "Parts",
+          "factory": "org.tatiana.calcite.playground.data.PartsTableFactory"
+        }
+      ]
+    }
+  ]
+}
