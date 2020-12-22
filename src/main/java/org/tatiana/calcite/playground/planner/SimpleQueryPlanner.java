@@ -58,8 +58,7 @@ public class SimpleQueryPlanner {
         // Create the query planner with the toy schema
         SimpleQueryPlanner queryPlanner = new SimpleQueryPlanner(connection.getRootSchema()
                 .getSubSchema(connection.getSchema()));
-        RelNode logicalPlan = queryPlanner.getLogicalPlan("select color from parts where color='aka'");
-        System.out.println(logicalPlan.getDescription());
+        RelNode logicalPlan = queryPlanner.getLogicalPlan("select units from parts where color='aka'");
         System.out.println(RelOptUtil.toString(logicalPlan));
     }
 
@@ -71,9 +70,15 @@ public class SimpleQueryPlanner {
         } catch (SqlParseException e) {
             throw new RuntimeException("Query parsing error.", e);
         }
+
+        System.out.println("---SqlNode---");
+        System.out.println(".getKind(): " + sqlNode.getKind());
+        System.out.println(".getClass(): " + sqlNode.getClass());
+        System.out.println(sqlNode);
+        System.out.println("---SqlNode---\n");
+
         SqlNode validatedSqlNode = planner.validate(sqlNode);
 
-        System.out.println(validatedSqlNode.toString());
         return planner.rel(validatedSqlNode).project();
     }
 
